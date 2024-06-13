@@ -15,7 +15,8 @@ class CharactersHPListPage extends StatefulWidget {
 }
 
 class CharactersHPListPageState extends State<CharactersHPListPage> {
-  BuscaApi api = BuscaApi<CharactersHP>((json) => CharactersHP.fromJson(json), urlApi: BASE_URL_CHARACTERS);
+  BuscaApi api = BuscaApi<CharactersHP>((json) => CharactersHP.fromJson(json),
+      urlApi: BASE_URL_CHARACTERS);
   late List<CharactersHP> _characters;
   late List<CharactersHP> _charactersFiltered;
 
@@ -44,21 +45,21 @@ class CharactersHPListPageState extends State<CharactersHPListPage> {
     });
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
-      appBar: const CustomAppBar(titleAppBar: "Lista de Personagens de Harry Potter", colorAppBar: AppColors.primaryColor),
-      body: _isLoading
-          ? const Center(child: CircularProgressIndicator())
-          : Column(
-              children: [
-                PesquisarItens(onChanged: _filterCharacters),
-                Expanded(
-                  child: ListItems<CharactersHP>(items: _charactersFiltered),
-                ),
-              ],
-            ),
-    );
-  }
+@override
+Widget build(BuildContext context) {
+  return Scaffold(
+    backgroundColor: AppColors.backgroundColor,
+    appBar: const CustomAppBar(titleAppBar: "Lista de Personagens de Harry Potter", colorAppBar: AppColors.primaryColor),
+    body: _isLoading
+        ? const Center(child: CircularProgressIndicator())
+        : Column(
+            children: [
+              PesquisarItens(onChanged: _filterCharacters),
+              Expanded(
+                child: ListItems<CharactersHP>(items: _charactersFiltered),
+              ),
+            ],
+          ),
+  );
+}
 }
