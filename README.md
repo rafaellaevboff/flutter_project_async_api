@@ -1,6 +1,8 @@
-# flutter_project_async_api
+# Projeto em Flutter(Dart) - componentes, funções assíncronas e Futures
 
-Um projeto desenvolvido em Flutter para a ap2 da cadeira de "Desenvolvimento de Sistemas Móveis".
+A aplicação foi desenvolvida em Flutter/Dart para a ap2 da cadeira de "Desenvolvimento de Sistemas Móveis".
+Está organizado em pastas (services, models, widgets, pages, themes) e usa funções assíncronas e Futures para buscar os dados de API online.
+
 A aplicação consome as apis:
 Harry Potter: https://github.com/fedeperin/potterapi?tab=readme-ov-file
 
