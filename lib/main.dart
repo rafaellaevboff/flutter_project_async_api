@@ -1,94 +1,50 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_project_async_api/models/Coffee.dart';
-import 'package:flutter_project_async_api/services/coffee_api.dart';
+import 'package:flutter_project_async_api/pages/coffee_list_page.dart';
+import 'package:flutter_project_async_api/widgets/buttom_acess_list.dart';
+import 'package:flutter_project_async_api/widgets/custom_app_bar.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  CoffeesApi api = CoffeesApi();
-
-  late List<Character> _coffees;
-  late List<Character> _coffeesFiltered;
-
-  @override
-  void initState() {
-    super.initState();
-    _fetchCoffees();
-  }
-
-  Future<List<Character>> _fetchCoffees() async {
-    _coffees = await api.fetchCoffees();
-    _coffeesFiltered = _coffees;
-
-    return _coffees;
-  }
-
-  _filtercoffees(String filter) {
-    setState(() {
-      _coffeesFiltered = _coffees
-          .where((element) =>
-              element.name.toLowerCase().contains(filter.toLowerCase()))
-          .toList();
-    });
-  }
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text("Personagens"),
-          backgroundColor: Colors.blue,
-        ),
-        body: Column(
+      home: HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: CustomAppBar(
+        titleAppBar: "Página Inicial",
+        colorAppBar: Colors.deepPurpleAccent.shade200,
+      ),
+      body: const Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.all(20),
-              child: TextField(
-                onChanged: (value) {
-                  _filtercoffees(value);
-                },
-                decoration: const InputDecoration(
-                    border: OutlineInputBorder(), labelText: "Filtro"),
-              ),
+              padding: EdgeInsets.only(bottom: 8),
+              child: ButtomAcessList(
+                  titleButton: 'Ir para a Lista de Cafés',
+                  pageToNavigate: CoffeeListPage()),
             ),
-            FutureBuilder<List<Character>>(
-                future: api.fetchCoffees(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    return Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.only(bottom: 20),
-                        child: ListView.separated(
-                            itemBuilder: (context, index) {
-                              return ListTile(
-                                title: Text(_coffeesFiltered[index].name),
-                                subtitle:
-                                    Text(_coffeesFiltered[index].descricao),
-                                leading: Image.network(
-                                    _coffeesFiltered[index].image),
-                              );
-                            },
-                            separatorBuilder: (_, __) {
-                              return const Divider();
-                            },
-                            itemCount: _coffeesFiltered.length),
-                      ),
-                    );
-                  }
-                  return const Text("Erro");
-                }),
+            Padding(
+              padding: EdgeInsets.only(bottom: 8),
+              child: ButtomAcessList(
+                  titleButton: 'Ir para a Lista de Cafés',
+                  pageToNavigate: CoffeeListPage()),
+            ),
           ],
         ),
       ),
