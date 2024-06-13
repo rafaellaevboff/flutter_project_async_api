@@ -1,7 +1,8 @@
 # flutter_project_async_api
 
 Um projeto desenvolvido em Flutter para a ap2 da cadeira de "Desenvolvimento de Sistemas Móveis".
-A aplicação consome a api https://api.sampleapis.com/coffee/hot.
+A aplicação consome as apis:
+Harry Potter: https://github.com/fedeperin/potterapi?tab=readme-ov-file
 
 ## Getting Started
 
