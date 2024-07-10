@@ -45,21 +45,24 @@ class CharactersHPListPageState extends State<CharactersHPListPage> {
     });
   }
 
-@override
-Widget build(BuildContext context) {
-  return Scaffold(
-    backgroundColor: AppColors.backgroundColor,
-    appBar: const CustomAppBar(titleAppBar: "Lista de Personagens de Harry Potter", colorAppBar: AppColors.primaryColor),
-    body: _isLoading
-        ? const Center(child: CircularProgressIndicator())
-        : Column(
-            children: [
-              PesquisarItens(onChanged: _filterCharacters),
-              Expanded(
-                child: ListItems<CharactersHP>(items: _charactersFiltered),
-              ),
-            ],
-          ),
-  );
-}
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppColors.backgroundColor,
+      appBar: CustomAppBar(
+          titleAppBar: "Lista de Personagens de Harry Potter",
+          colorAppBar: AppColors.black,
+          colorText: Colors.white),
+      body: _isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : Column(
+              children: [
+                PesquisarItens(onChanged: _filterCharacters),
+                Expanded(
+                  child: ListItems<CharactersHP>(items: _charactersFiltered),
+                ),
+              ],
+            ),
+    );
+  }
 }

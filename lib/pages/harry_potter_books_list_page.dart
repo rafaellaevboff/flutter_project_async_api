@@ -11,11 +11,13 @@ class HarryPotterBooksListPage extends StatefulWidget {
   const HarryPotterBooksListPage({super.key});
 
   @override
-  State<HarryPotterBooksListPage> createState() => HarryPotterBooksListPageState();
+  State<HarryPotterBooksListPage> createState() =>
+      HarryPotterBooksListPageState();
 }
 
 class HarryPotterBooksListPageState extends State<HarryPotterBooksListPage> {
-  BuscaApi api = BuscaApi<HarryPotter>((json) => HarryPotter.fromJson(json), urlApi: BASE_URL_BOOKS);
+  BuscaApi api = BuscaApi<HarryPotter>((json) => HarryPotter.fromJson(json),
+      urlApi: BASE_URL_BOOKS);
   late List<HarryPotter> _harryPotterBooks;
   late List<HarryPotter> _harryPotterBooksFiltered;
 
@@ -39,7 +41,7 @@ class HarryPotterBooksListPageState extends State<HarryPotterBooksListPage> {
     setState(() {
       _harryPotterBooksFiltered = _harryPotterBooks
           .where((harryPotter) =>
-          harryPotter.name.toLowerCase().contains(filter.toLowerCase()))
+              harryPotter.name.toLowerCase().contains(filter.toLowerCase()))
           .toList();
     });
   }
@@ -48,17 +50,21 @@ class HarryPotterBooksListPageState extends State<HarryPotterBooksListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
-      appBar: const CustomAppBar(titleAppBar: "Lista de livros de Harry Potter", colorAppBar: AppColors.primaryColor),
+      appBar: CustomAppBar(
+          titleAppBar: "Lista de livros de Harry Potter",
+          colorAppBar: AppColors.black,
+          colorText: Colors.white),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : Column(
-        children: [
-          PesquisarItens(onChanged: _filterHarryPotters),
-          Expanded(
-            child: ListItems<HarryPotter>(items: _harryPotterBooksFiltered),
-          ),
-        ],
-      ),
+              children: [
+                PesquisarItens(onChanged: _filterHarryPotters),
+                Expanded(
+                  child:
+                      ListItems<HarryPotter>(items: _harryPotterBooksFiltered),
+                ),
+              ],
+            ),
     );
   }
 }
